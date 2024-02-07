@@ -1,0 +1,9 @@
+read -p "Input : " inp
+while [[ "$inp" =~ [^a-zA-Z0-9] || -z "$inp" ]]
+do        
+   echo "The input contains special characters."     
+   echo "Input only alphanumeric characters."          
+   read -p "Input : " inp
+done
+echo "Successful Input"
+

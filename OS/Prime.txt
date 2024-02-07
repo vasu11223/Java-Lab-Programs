@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<conio.h>
+#define max 25
+void main()
+{
+int frag[max],b[max],f[max],i,j,nb,nf,temp,highest=0;
+static int bf[max],ff[max];
+clrscr();
+printf("\n\tMemory Management Scheme - Worst Fit");
+printf("\nEnter the number of blocks:");
+scanf("%d",&nb);
+printf("Enter the number of files:");
+scanf("%d",&nf);
+printf("\nEnter the size of the blocks:-\n");
+for(i=1;i<=nb;i++)
+{
+printf("Block %d:",i);
+scanf("%d",&b[i]);
+}
+echo "Prime number program......"
+read number
+i=2
+flag=0
+while [ $i -le `expr $number / 2` ]
+do
+if [ `expr $number % $i` -eq 0 ]
+then
+flag=1
+fi
+
+i=`expr $i + 1`
+done
+if [ $flag -eq 1 ]
+then
+echo "The number is Not Prime"
+else
+echo "The number is Prime"
+fi
