@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main() {
+    FILE *file;
+    char line[100];
+
+    // Open the file in append mode
+    file = fopen("example.txt", "a");
+
+    if (file == NULL) {
+        printf("Error opening the file.\n");
+        return 1;
+    }
+
+    printf("Enter multiple lines to append at the end of the file (Enter 'q' to quit):\n");
+
+    // Read lines from the user and append them to the file
+    while (fgets(line, sizeof(line), stdin)) {
+        // Check for the termination condition
+        if (line[0] == 'q' && line[1] == '\n') {
+            break;
+        }
+        // Append the line to the file
+        fputs(line, file);
+    }
+
+    // Close the file
+    fclose(file);
+
+    printf("Lines appended successfully.\n");
+
+    return 0;
+}
