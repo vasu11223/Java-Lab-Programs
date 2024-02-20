@@ -1,0 +1,53 @@
+// Non-recursive linear search function
+int linear_search_non_recursive(int arr[], int n, int key) {
+    for (int i = 0; i < n; ++i) {
+        if (arr[i] == key) {
+            return i; // Return the index if key is found
+        }
+    }
+    return -1; // Return -1 if key is not found
+}
+
+// Recursive linear search function
+int linear_search_recursive(int arr[], int key, int start, int end) {
+    if (start > end) {
+        return -1; // Key not found
+    }
+    if (arr[start] == key) {
+        return start; // Key found at index start
+    }
+    return linear_search_recursive(arr, key, start + 1, end); // Recursively search in the remaining list
+}
+
+int main() {
+    int n, key;
+    printf("Enter the number of elements in the list: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter the key value to search: ");
+    scanf("%d", &key);
+
+    // Non-recursive linear search
+    int non_recursive_result = linear_search_non_recursive(arr, n, key);
+    if (non_recursive_result != -1) {
+        printf("Key found at index (non-recursive): %d\n", non_recursive_result);
+    } else {
+        printf("Key not found (non-recursive)\n");
+    }
+
+    // Recursive linear search
+    int recursive_result = linear_search_recursive(arr, key, 0, n - 1);
+    if (recursive_result != -1) {
+        printf("Key found at index (recursive): %d\n", recursive_result);
+    } else {
+        printf("Key not found (recursive)\n");
+    }
+
+    return 0;
+}
