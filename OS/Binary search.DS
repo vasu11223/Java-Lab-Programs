@@ -1,0 +1,52 @@
+#include <stdio.h>
+int binarySearchNonRecursive(int arr[], int n, int key) {
+ int low = 0, high = n - 1;
+ while (low <= high) {
+ int mid = low + (high - low) / 2; 
+ if (arr[mid] == key)
+ return mid; // Key found, return index
+ else if (arr[mid] < key)
+ low = mid + 1; // Key is in the right half
+ else
+ high = mid - 1; // Key is in the left half
+ }
+ return -1; // Key not found
+}
+int binarySearchRecursive(int arr[], int key, int low, int high) {
+ if (low > high)
+ return -1; // Key not found
+ int mid = low + (high - low) / 2;
+ if (arr[mid] == key)
+ return mid; // Key found, return index
+ else if (arr[mid] < key)
+ return binarySearchRecursive(arr, key, mid + 1, high); // Search in the right half
+ else
+ return binarySearchRecursive(arr, key, low, mid - 1); // Search in the left half
+}
+int main() {
+ int n, key;
+ printf("Enter the number of elements in the list: ");
+ scanf("%d", &n);
+ int arr[n];
+ printf("Enter %d sorted elements: ", n);
+ for (int i = 0; i < n; i++) {
+ scanf("%d", &arr[i]);
+ }
+ printf("Enter the key value to search: ");
+ scanf("%d", &key);
+ int result_non_recursive = binarySearchNonRecursive(arr, n, key);
+ if (result_non_recursive != -1) {
+ printf("Key %d found at index %d (non-recursive).\n", key, result_non_recursive);
+ } else {
+ printf("Key %d not found (non-recursive).\n", key);
+ }
+ADITYA ENGINEERING COLLEGE(A) DATA STRUCTURES LAB
+PAGE NO: Roll Number: _ _ _ _ _ _ _ _ _ _ 
+ int result_recursive = binarySearchRecursive(arr, key, 0, n - 1);
+ if (result_recursive != -1) {
+ printf("Key %d found at index %d (recursive).\n", key, result_recursive);
+ } else {
+ printf("Key %d not found (recursive).\n", key);
+ }
+ return 0;
+}
