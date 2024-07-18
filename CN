@@ -1,90 +1,109 @@
-#include <stdio.h>
-#include <limits.h>
-#define MAX 100
-int minDistance(int dist[], int sptSet[], int V) {
-    int min = INT_MAX, min_index;
-    for (int v = 0; v < V; v++) {
-        if (sptSet[v] == 0 && dist[v] <= min) {
-            min = dist[v];
-            min_index = v;
-        }
-    }
-    return min_index;
-}
-void dijkstra(int graph[MAX][MAX], int V, int src) {
-    int dist[V]; 
-    int sptSet[V];
-    for (int i = 0; i < V; i++) {
-        dist[i] = INT_MAX;
-        sptSet[i] = 0;
-    }
-    dist[src] = 0;
-    for (int count = 0; count < V - 1; count++) {
-        int u = minDistance(dist, sptSet, V);
-        sptSet[u] = 1;
-        for (int v = 0; v < V; v++) {
-            if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v]) {
-                dist[v] = dist[u] + graph[u][v];
-            }
-        }
-    }
-    printf("Vertex \t Distance from Source\n");
-    for (int i = 0; i < V; i++) {
-        printf("%d \t\t %d\n", i, dist[i]);
-    }
-}
-int main() {
-    int V, src;
-    int graph[MAX][MAX];
-    printf("Enter the number of vertices: ");
-    scanf("%d", &V);
-    printf("Enter the adjacency matrix:\n");
-    for (int i = 0; i < V; i++) {
-        for (int j = 0; j < V; j++) {
-            scanf("%d", &graph[i][j]);
-        }
-    }
-    printf("Enter the source vertex: ");
-    scanf("%d", &src);
 
-    dijkstra(graph, V, src);
-    return 0;
-}
-____________________________________________________________________________________
-#include<stdio.h> 
-struct node {
-unsigned dist[20]; unsigned from[20];
-} 
-rt[10];
-int main() {
-int costmat[20][20]; 
-int nodes,i,j,k,count=0;
-printf("\nEnter the number of nodes : "); 
-scanf("%d",&nodes);//Enter the nodes 
-printf("\nEnter the cost matrix :\n"); 
-for(i=1;i<=nodes;i++)
-{
-for(j=1;j<=nodes;j++) { 
-scanf("%d",&costmat[i][j]); 
-costmat[i][i]=0; 
-rt[i].dist[j]=costmat[i][j]; 
-rt[i].from[j]=j;
-} }
-do{ 
-count=0;
-for(i=1;i<=nodes;i++) 
-for(j=1;j<=nodes;j++) 
-for(k=1;k<=nodes;k++) 
-if(rt[i].dist[j]>costmat[i][k]+rt[k].dist[j]){
-rt[i].dist[j]=rt[i].dist[k]+rt[k].dist[j]; 
-rt[i].from[j]=k;
-count++; }
-}
-while(count!=0); 
-for(i=1;i<=nodes;i++){
-printf("\n\n For router %d\n",i); 
-for(j=1;j<=nodes;j++) {
-printf("\t\nnode %d via %d Distance %d ",j,rt[i].from[j],rt[i].dist[j]);
-} }
-printf("\n\n");
-}
+a) Write a PL/SQL block for Addition of Two Numbers.
+Here's a PL/SQL block for adding two numbers:
+SET SERVEROUTPUT ON;
+DECLARE
+num1 NUMBER := 10;
+num2 NUMBER := 20;
+sum NUMBER;
+BEGIN
+sum := num1 + num2;
+DBMS_OUTPUT.PUT_LINE('The sum of ' || num1 || ' and ' || num2 || ' is: ' || sum);
+END;
+___________________
+____________________
+Write a PL/SQL block for IF, IF and else condition.
+Here's a PL/SQL block demonstrating IF and IF-ELSE conditions:
+SET SERVEROUTPUT ON;
+DECLARE
+num1 NUMBER := 10;
+num2 NUMBER := 20;
+BEGIN
+-- IF condition
+IF num1 > num2 THEN
+DBMS_OUTPUT.PUT_LINE(num1 || ' is greater than ' || num2);
+END IF;
+-- IF-ELSE condition
+IF num1 < num2 THEN
+DBMS_OUTPUT.PUT_LINE(num1 || ' is less than ' || num2);
+ELSE
+DBMS_OUTPUT.PUT_LINE(num1 || ' is not less than ' || num2);
+END IF;
+END;
+_______________________
+________________________
+DECLARE
+i NUMBER := 1;
+BEGIN
+-- WHILE loop
+WHILE i <= 5 LOOP
+DBMS_OUTPUT.PUT_LINE('Value of i: ' || i);
+i := i + 1;
+END LOOP;
+-- FOR loop
+FOR j IN 1..5 LOOP
+DBMS_OUTPUT.PUT_LINE('Value of j: ' || j);
+END LOOP;
+END;
+______________________
+______________________
+greatest of 3
+SET SERVEROUTPUT ON;
+DECLARE
+num1 NUMBER := 10;
+num2 NUMBER := 20;
+num3 NUMBER := 15;
+greatest NUMBER;
+BEGIN
+IF num1 >= num2 AND num1 >= num3 THEN
+greatest := num1;
+ELSIF num2 >= num1 AND num2 >= num3 THEN
+greatest := num2;
+ELSE
+greatest := num3;
+END IF;
+____________________
+_____________________
+Raising Exceptions:
+DECLARE
+v_num1 NUMBER := 10;
+v_num2 NUMBER := 0;
+BEGIN
+IF v_num2 = 0 THEN
+RAISE ZERO_DIVIDE;
+ELSE
+DBMS_OUTPUT.PUT_LINE('Result: ' || v_num1 / v_num2);
+END IF;
+EXCEPTION
+WHEN ZERO_DIVIDE THEN
+DBMS_OUTPUT.PUT_LINE('Error: Division by zero');
+END;
+
+
+User-Defined Exceptions:
+DECLARE
+v_age NUMBER := 15;
+v_min_age CONSTANT NUMBER := 18;
+BEGIN
+IF v_age < v_min_age THEN
+RAISE_APPLICATION_ERROR(-20001, 'Age must be at least 18');
+ELSE
+DBMS_OUTPUT.PUT_LINE('You are eligible');
+END IF;
+EXCEPTION
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+END;
+
+DECLARE
+v_salary NUMBER := -1000;
+BEGIN
+IF v_salary < 0 THEN
+RAISE VALUE_ERROR;
+ELSE
+DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+END IF;
+EXCEPTION
+WHEN VALUE_ERROR THEN
+DBMS_OUTPUT.PUT_LINE('Error: Invalid salary value');
+END;
